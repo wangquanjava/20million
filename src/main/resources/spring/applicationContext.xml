@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans.xsd
+
+
+							http://www.springframework.org/schema/aop 
+							http://www.springframework.org/schema/aop/spring-aop.xsd
+					        http://www.springframework.org/schema/context
+					        http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:component-scan base-package="com.git.service,com.git.utils"/>
+
+    <!--Druid，统计service和dao-->
+    <!--<bean id="druidStatInterceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">-->
+    <!--</bean>-->
+    <!--<bean id="jdkRegexpMethodPointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"-->
+          <!--scope="prototype">-->
+        <!--<property name="patterns">-->
+            <!--<list>-->
+                <!--<value>com.git.service.*</value>-->
+                <!--<value>com.git.dao.*</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!--<aop:config>-->
+        <!--<aop:advisor advice-ref="druidStatInterceptor" pointcut-ref="jdkRegexpMethodPointcut"/>-->
+    <!--</aop:config>-->
+
+    <!-- messageSource的配置 -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>i18n/ResultCode</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 非注解情况下获得spring对象 -->
+    <bean class="com.git.utils.SpringContextUtils"/>
+</beans>

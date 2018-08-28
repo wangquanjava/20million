@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://www.springframework.org/schema/tx 
+							http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 只能扫描继承通用Mapper的接口 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.git.dao.mapper"/>
+    </bean>
+
+    <!-- 加载配置文件-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <!-- 允许JVM参数覆盖 -->
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <!-- 忽略没有找到的资源文件 -->
+        <property name="ignoreResourceNotFound" value="true"/>
+        <!-- 配置资源文件 -->
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:env.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- gruid连接池 -->
+    <!--<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">-->
+        <!--&lt;!&ndash; 基本属性 url、user、password，driverClassName可以根据url自动配置 &ndash;&gt;-->
+        <!--<property name="url" value="${jdbc.url}"/>-->
+        <!--<property name="username" value="${jdbc.username}"/>-->
+        <!--<property name="password" value="${jdbc.password}"/>-->
+
+        <!--&lt;!&ndash; 配置初始化大小、最小、最大 &ndash;&gt;-->
+        <!--<property name="initialSize" value="1"/>-->
+        <!--<property name="minIdle" value="1"/>-->
+        <!--<property name="maxActive" value="20"/>-->
+        <!--&lt;!&ndash; 配置获取连接等待超时的时间 &ndash;&gt;-->
+        <!--<property name="maxWait" value="60000"/>-->
+
+        <!--&lt;!&ndash; 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 &ndash;&gt;-->
+        <!--<property name="timeBetweenEvictionRunsMillis" value="60000"/>-->
+
+        <!--&lt;!&ndash; 是否空闲的判定，大于这时间的就算空闲 &ndash;&gt;-->
+        <!--<property name="minEvictableIdleTimeMillis" value="300000"/>-->
+
+        <!--&lt;!&ndash; 测试连接是否有效的sql &ndash;&gt;-->
+        <!--<property name="validationQuery" value="SELECT 'x'"/>-->
+        <!--<property name="testWhileIdle" value="true"/>-->
+        <!--<property name="testOnBorrow" value="false"/>-->
+        <!--<property name="testOnReturn" value="false"/>-->
+        <!--&lt;!&ndash; 配置监控统计拦截的filters &ndash;&gt;-->
+        <!--<property name="filters" value="stat"/>-->
+    <!--</bean>-->
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+
+    <bean id="multiDatasource" class="com.git.datasource.MultipleDataSource">
+        <property name="targetDataSources">
+            <map>
+                <entry key="datasource" value-ref="dataSource"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 配置sqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 配置数据源 -->
+        <property name="dataSource" ref="multiDatasource"/>
+        <!-- mybatis全局配置文件 -->
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+        <!-- 配置别名扫描包 -->
+        <property name="typeAliasesPackage" value="com.git.dao.pojo"/>
+        <!--加载xml文件-->
+        <property name="mapperLocations" value="classpath*:com/git/dao/xml/*.xml"/>
+    </bean>
+
+    <!-- 事务相关 -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="multiDatasource"></property>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="txManager"/>
+</beans>

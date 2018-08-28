@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="MyWebApp" version="2.5">
+	<display-name>20million</display-name>
+	
+	<!-- spring -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring/applicationContext*.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- 支持put -->
+	<filter>
+		<filter-name>HttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>HttpMethodFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- springMVC -->
+	<servlet>
+		<servlet-name>20million</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring/springmvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>20million</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!--&lt;!&ndash; druid相关 &ndash;&gt;-->
+	<!--<servlet>-->
+		<!--<servlet-name>DruidStatView</servlet-name>-->
+		<!--<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>-->
+	<!--</servlet>-->
+	<!--<servlet-mapping>-->
+		<!--<servlet-name>DruidStatView</servlet-name>-->
+		<!--<url-pattern>/druid/*</url-pattern>-->
+	<!--</servlet-mapping>-->
+	<!--<filter>-->
+		<!--<filter-name>DruidWebStatFilter</filter-name>-->
+		<!--<filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>-->
+		<!--<init-param>-->
+			<!--<param-name>exclusions</param-name>-->
+			<!--<param-value>*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*</param-value>-->
+		<!--</init-param>-->
+		<!--<init-param>-->
+			<!--<param-name>profileEnable</param-name>-->
+			<!--<param-value>true</param-value>-->
+		<!--</init-param>-->
+		<!--<init-param>-->
+			<!--<param-name>principalSessionName</param-name>-->
+			<!--<param-value>xxx</param-value>-->
+		<!--</init-param>-->
+	<!--</filter>-->
+	<!--<filter-mapping>-->
+		<!--<filter-name>DruidWebStatFilter</filter-name>-->
+		<!--<url-pattern>/*</url-pattern>-->
+	<!--</filter-mapping>-->
+	
+	<!-- 编码 -->
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	    <!--是否忽略代码中的request(response).getCharacterEncoding()。默认是false，只有没有值的情况才设值-->
+		<init-param> 
+		    <param-name>forceEncoding</param-name>  
+		    <param-value>true</param-value>  
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 加入自定义listener，监测服务器开启和关闭 -->
+	<listener>
+		<listener-class>com.git.listener.ContextListener</listener-class>
+	</listener>
+	
+	<!-- 全局的500错误页面 -->
+	<error-page>
+	    <error-code>500</error-code>
+	    <location>/500.jsp</location>
+	</error-page>
+</web-app>
