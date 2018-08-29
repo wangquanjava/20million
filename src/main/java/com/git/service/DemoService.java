@@ -140,9 +140,9 @@ public class DemoService {
             }
 
             try {
-                boolean await = countDownLatch.await(1, TimeUnit.MINUTES);
+                boolean await = countDownLatch.await(10, TimeUnit.MINUTES);
                 Preconditions.checkArgument(await, "计数器返回false");
-                log.info("本次拉取出的结果都执行完毕, 执行时间:{}", started.elapsed(TimeUnit.MILLISECONDS));
+                log.info("本次拉取出的结果都执行完毕, 执行时间:{}, 每秒吞吐量:{}", started.elapsed(TimeUnit.MILLISECONDS), PAGE_SIZE/started.elapsed(TimeUnit.SECONDS));
             } catch (InterruptedException e) {
                 log.error("等待计数器被打断", e);
             }
