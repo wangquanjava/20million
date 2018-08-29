@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class ThreadManager {
     public static final ExecutorService COMMEN_POOL = new ThreadPoolExecutor(
-            200,
-            300,
+            500,
+            700,
             1,
             TimeUnit.SECONDS,
             new SynchronousQueue<Runnable>());

@@ -58,7 +58,7 @@ public class DemoService {
     };
     public static final int SIZE_ONE_TASK = 200;
     // 相除就是线程数
-    public static final int PAGE_SIZE = 40000;
+    public static final int PAGE_SIZE = 100000;
     @Autowired
     private DemoMapper demoMapper;
     @Autowired
