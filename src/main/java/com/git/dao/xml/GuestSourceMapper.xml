@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.git.dao.mapper.GuestSourceMapper" >
+  <resultMap id="BaseResultMap" type="com.git.dao.pojo.GuestSource" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.git.dao.pojo.GuestSource" extends="BaseResultMap" >
+    <result column="Name" property="name" jdbcType="LONGVARCHAR" />
+    <result column="CardNo" property="cardno" jdbcType="LONGVARCHAR" />
+    <result column="Descriot" property="descriot" jdbcType="LONGVARCHAR" />
+    <result column="CtfTp" property="ctftp" jdbcType="LONGVARCHAR" />
+    <result column="CtfId" property="ctfid" jdbcType="LONGVARCHAR" />
+    <result column="Gender" property="gender" jdbcType="LONGVARCHAR" />
+    <result column="Birthday" property="birthday" jdbcType="LONGVARCHAR" />
+    <result column="Address" property="address" jdbcType="LONGVARCHAR" />
+    <result column="Zip" property="zip" jdbcType="LONGVARCHAR" />
+    <result column="Dirty" property="dirty" jdbcType="LONGVARCHAR" />
+    <result column="District1" property="district1" jdbcType="LONGVARCHAR" />
+    <result column="District2" property="district2" jdbcType="LONGVARCHAR" />
+    <result column="District3" property="district3" jdbcType="LONGVARCHAR" />
+    <result column="District4" property="district4" jdbcType="LONGVARCHAR" />
+    <result column="District5" property="district5" jdbcType="LONGVARCHAR" />
+    <result column="District6" property="district6" jdbcType="LONGVARCHAR" />
+    <result column="FirstNm" property="firstnm" jdbcType="LONGVARCHAR" />
+    <result column="LastNm" property="lastnm" jdbcType="LONGVARCHAR" />
+    <result column="Duty" property="duty" jdbcType="LONGVARCHAR" />
+    <result column="Mobile" property="mobile" jdbcType="LONGVARCHAR" />
+    <result column="Tel" property="tel" jdbcType="LONGVARCHAR" />
+    <result column="Fax" property="fax" jdbcType="LONGVARCHAR" />
+    <result column="EMail" property="email" jdbcType="LONGVARCHAR" />
+    <result column="Nation" property="nation" jdbcType="LONGVARCHAR" />
+    <result column="Taste" property="taste" jdbcType="LONGVARCHAR" />
+    <result column="Education" property="education" jdbcType="LONGVARCHAR" />
+    <result column="Company" property="company" jdbcType="LONGVARCHAR" />
+    <result column="CTel" property="ctel" jdbcType="LONGVARCHAR" />
+    <result column="CAddress" property="caddress" jdbcType="LONGVARCHAR" />
+    <result column="CZip" property="czip" jdbcType="LONGVARCHAR" />
+    <result column="Family" property="family" jdbcType="LONGVARCHAR" />
+    <result column="Version" property="version" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id
+  </sql>
+  <sql id="Blob_Column_List" >
+    Name, CardNo, Descriot, CtfTp, CtfId, Gender, Birthday, Address, Zip, Dirty, District1, 
+    District2, District3, District4, District5, District6, FirstNm, LastNm, Duty, Mobile, 
+    Tel, Fax, EMail, Nation, Taste, Education, Company, CTel, CAddress, CZip, Family, 
+    Version
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.git.dao.pojo.GuestSourceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from guest_source
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.git.dao.pojo.GuestSourceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from guest_source
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from guest_source
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from guest_source
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.git.dao.pojo.GuestSourceExample" >
+    delete from guest_source
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.git.dao.pojo.GuestSource" >
+    insert into guest_source (id, Name, CardNo, 
+      Descriot, CtfTp, CtfId, 
+      Gender, Birthday, Address, 
+      Zip, Dirty, District1, 
+      District2, District3, District4, 
+      District5, District6, FirstNm, 
+      LastNm, Duty, Mobile, 
+      Tel, Fax, EMail, 
+      Nation, Taste, Education, 
+      Company, CTel, CAddress, 
+      CZip, Family, Version
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=LONGVARCHAR}, #{cardno,jdbcType=LONGVARCHAR}, 
+      #{descriot,jdbcType=LONGVARCHAR}, #{ctftp,jdbcType=LONGVARCHAR}, #{ctfid,jdbcType=LONGVARCHAR}, 
+      #{gender,jdbcType=LONGVARCHAR}, #{birthday,jdbcType=LONGVARCHAR}, #{address,jdbcType=LONGVARCHAR}, 
+      #{zip,jdbcType=LONGVARCHAR}, #{dirty,jdbcType=LONGVARCHAR}, #{district1,jdbcType=LONGVARCHAR}, 
+      #{district2,jdbcType=LONGVARCHAR}, #{district3,jdbcType=LONGVARCHAR}, #{district4,jdbcType=LONGVARCHAR}, 
+      #{district5,jdbcType=LONGVARCHAR}, #{district6,jdbcType=LONGVARCHAR}, #{firstnm,jdbcType=LONGVARCHAR}, 
+      #{lastnm,jdbcType=LONGVARCHAR}, #{duty,jdbcType=LONGVARCHAR}, #{mobile,jdbcType=LONGVARCHAR}, 
+      #{tel,jdbcType=LONGVARCHAR}, #{fax,jdbcType=LONGVARCHAR}, #{email,jdbcType=LONGVARCHAR}, 
+      #{nation,jdbcType=LONGVARCHAR}, #{taste,jdbcType=LONGVARCHAR}, #{education,jdbcType=LONGVARCHAR}, 
+      #{company,jdbcType=LONGVARCHAR}, #{ctel,jdbcType=LONGVARCHAR}, #{caddress,jdbcType=LONGVARCHAR}, 
+      #{czip,jdbcType=LONGVARCHAR}, #{family,jdbcType=LONGVARCHAR}, #{version,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.git.dao.pojo.GuestSource" >
+    insert into guest_source
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="cardno != null" >
+        CardNo,
+      </if>
+      <if test="descriot != null" >
+        Descriot,
+      </if>
+      <if test="ctftp != null" >
+        CtfTp,
+      </if>
+      <if test="ctfid != null" >
+        CtfId,
+      </if>
+      <if test="gender != null" >
+        Gender,
+      </if>
+      <if test="birthday != null" >
+        Birthday,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="zip != null" >
+        Zip,
+      </if>
+      <if test="dirty != null" >
+        Dirty,
+      </if>
+      <if test="district1 != null" >
+        District1,
+      </if>
+      <if test="district2 != null" >
+        District2,
+      </if>
+      <if test="district3 != null" >
+        District3,
+      </if>
+      <if test="district4 != null" >
+        District4,
+      </if>
+      <if test="district5 != null" >
+        District5,
+      </if>
+      <if test="district6 != null" >
+        District6,
+      </if>
+      <if test="firstnm != null" >
+        FirstNm,
+      </if>
+      <if test="lastnm != null" >
+        LastNm,
+      </if>
+      <if test="duty != null" >
+        Duty,
+      </if>
+      <if test="mobile != null" >
+        Mobile,
+      </if>
+      <if test="tel != null" >
+        Tel,
+      </if>
+      <if test="fax != null" >
+        Fax,
+      </if>
+      <if test="email != null" >
+        EMail,
+      </if>
+      <if test="nation != null" >
+        Nation,
+      </if>
+      <if test="taste != null" >
+        Taste,
+      </if>
+      <if test="education != null" >
+        Education,
+      </if>
+      <if test="company != null" >
+        Company,
+      </if>
+      <if test="ctel != null" >
+        CTel,
+      </if>
+      <if test="caddress != null" >
+        CAddress,
+      </if>
+      <if test="czip != null" >
+        CZip,
+      </if>
+      <if test="family != null" >
+        Family,
+      </if>
+      <if test="version != null" >
+        Version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cardno != null" >
+        #{cardno,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="descriot != null" >
+        #{descriot,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ctftp != null" >
+        #{ctftp,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ctfid != null" >
+        #{ctfid,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="zip != null" >
+        #{zip,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dirty != null" >
+        #{dirty,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="district1 != null" >
+        #{district1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="district2 != null" >
+        #{district2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="district3 != null" >
+        #{district3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="district4 != null" >
+        #{district4,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="district5 != null" >
+        #{district5,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="district6 != null" >
+        #{district6,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="firstnm != null" >
+        #{firstnm,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="lastnm != null" >
+        #{lastnm,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="duty != null" >
+        #{duty,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="taste != null" >
+        #{taste,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ctel != null" >
+        #{ctel,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caddress != null" >
+        #{caddress,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="czip != null" >
+        #{czip,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="family != null" >
+        #{family,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.git.dao.pojo.GuestSourceExample" resultType="java.lang.Integer" >
+    select count(*) from guest_source
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update guest_source
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        Name = #{record.name,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.cardno != null" >
+        CardNo = #{record.cardno,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.descriot != null" >
+        Descriot = #{record.descriot,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.ctftp != null" >
+        CtfTp = #{record.ctftp,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.ctfid != null" >
+        CtfId = #{record.ctfid,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.gender != null" >
+        Gender = #{record.gender,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.birthday != null" >
+        Birthday = #{record.birthday,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.address != null" >
+        Address = #{record.address,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.zip != null" >
+        Zip = #{record.zip,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.dirty != null" >
+        Dirty = #{record.dirty,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.district1 != null" >
+        District1 = #{record.district1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.district2 != null" >
+        District2 = #{record.district2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.district3 != null" >
+        District3 = #{record.district3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.district4 != null" >
+        District4 = #{record.district4,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.district5 != null" >
+        District5 = #{record.district5,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.district6 != null" >
+        District6 = #{record.district6,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.firstnm != null" >
+        FirstNm = #{record.firstnm,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.lastnm != null" >
+        LastNm = #{record.lastnm,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.duty != null" >
+        Duty = #{record.duty,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        Mobile = #{record.mobile,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        Tel = #{record.tel,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.fax != null" >
+        Fax = #{record.fax,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMail = #{record.email,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.nation != null" >
+        Nation = #{record.nation,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.taste != null" >
+        Taste = #{record.taste,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.education != null" >
+        Education = #{record.education,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.company != null" >
+        Company = #{record.company,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.ctel != null" >
+        CTel = #{record.ctel,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.caddress != null" >
+        CAddress = #{record.caddress,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.czip != null" >
+        CZip = #{record.czip,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.family != null" >
+        Family = #{record.family,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.version != null" >
+        Version = #{record.version,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update guest_source
+    set id = #{record.id,jdbcType=INTEGER},
+      Name = #{record.name,jdbcType=LONGVARCHAR},
+      CardNo = #{record.cardno,jdbcType=LONGVARCHAR},
+      Descriot = #{record.descriot,jdbcType=LONGVARCHAR},
+      CtfTp = #{record.ctftp,jdbcType=LONGVARCHAR},
+      CtfId = #{record.ctfid,jdbcType=LONGVARCHAR},
+      Gender = #{record.gender,jdbcType=LONGVARCHAR},
+      Birthday = #{record.birthday,jdbcType=LONGVARCHAR},
+      Address = #{record.address,jdbcType=LONGVARCHAR},
+      Zip = #{record.zip,jdbcType=LONGVARCHAR},
+      Dirty = #{record.dirty,jdbcType=LONGVARCHAR},
+      District1 = #{record.district1,jdbcType=LONGVARCHAR},
+      District2 = #{record.district2,jdbcType=LONGVARCHAR},
+      District3 = #{record.district3,jdbcType=LONGVARCHAR},
+      District4 = #{record.district4,jdbcType=LONGVARCHAR},
+      District5 = #{record.district5,jdbcType=LONGVARCHAR},
+      District6 = #{record.district6,jdbcType=LONGVARCHAR},
+      FirstNm = #{record.firstnm,jdbcType=LONGVARCHAR},
+      LastNm = #{record.lastnm,jdbcType=LONGVARCHAR},
+      Duty = #{record.duty,jdbcType=LONGVARCHAR},
+      Mobile = #{record.mobile,jdbcType=LONGVARCHAR},
+      Tel = #{record.tel,jdbcType=LONGVARCHAR},
+      Fax = #{record.fax,jdbcType=LONGVARCHAR},
+      EMail = #{record.email,jdbcType=LONGVARCHAR},
+      Nation = #{record.nation,jdbcType=LONGVARCHAR},
+      Taste = #{record.taste,jdbcType=LONGVARCHAR},
+      Education = #{record.education,jdbcType=LONGVARCHAR},
+      Company = #{record.company,jdbcType=LONGVARCHAR},
+      CTel = #{record.ctel,jdbcType=LONGVARCHAR},
+      CAddress = #{record.caddress,jdbcType=LONGVARCHAR},
+      CZip = #{record.czip,jdbcType=LONGVARCHAR},
+      Family = #{record.family,jdbcType=LONGVARCHAR},
+      Version = #{record.version,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update guest_source
+    set id = #{record.id,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.git.dao.pojo.GuestSource" >
+    update guest_source
+    <set >
+      <if test="name != null" >
+        Name = #{name,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cardno != null" >
+        CardNo = #{cardno,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="descriot != null" >
+        Descriot = #{descriot,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ctftp != null" >
+        CtfTp = #{ctftp,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ctfid != null" >
+        CtfId = #{ctfid,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="gender != null" >
+        Gender = #{gender,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="birthday != null" >
+        Birthday = #{birthday,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="address != null" >
+        Address = #{address,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="zip != null" >
+        Zip = #{zip,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dirty != null" >
+        Dirty = #{dirty,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="district1 != null" >
+        District1 = #{district1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="district2 != null" >
+        District2 = #{district2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="district3 != null" >
+        District3 = #{district3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="district4 != null" >
+        District4 = #{district4,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="district5 != null" >
+        District5 = #{district5,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="district6 != null" >
+        District6 = #{district6,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="firstnm != null" >
+        FirstNm = #{firstnm,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="lastnm != null" >
+        LastNm = #{lastnm,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="duty != null" >
+        Duty = #{duty,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mobile != null" >
+        Mobile = #{mobile,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tel != null" >
+        Tel = #{tel,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fax != null" >
+        Fax = #{fax,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="email != null" >
+        EMail = #{email,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="nation != null" >
+        Nation = #{nation,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="taste != null" >
+        Taste = #{taste,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="education != null" >
+        Education = #{education,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="company != null" >
+        Company = #{company,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ctel != null" >
+        CTel = #{ctel,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caddress != null" >
+        CAddress = #{caddress,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="czip != null" >
+        CZip = #{czip,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="family != null" >
+        Family = #{family,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="version != null" >
+        Version = #{version,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.git.dao.pojo.GuestSource" >
+    update guest_source
+    set Name = #{name,jdbcType=LONGVARCHAR},
+      CardNo = #{cardno,jdbcType=LONGVARCHAR},
+      Descriot = #{descriot,jdbcType=LONGVARCHAR},
+      CtfTp = #{ctftp,jdbcType=LONGVARCHAR},
+      CtfId = #{ctfid,jdbcType=LONGVARCHAR},
+      Gender = #{gender,jdbcType=LONGVARCHAR},
+      Birthday = #{birthday,jdbcType=LONGVARCHAR},
+      Address = #{address,jdbcType=LONGVARCHAR},
+      Zip = #{zip,jdbcType=LONGVARCHAR},
+      Dirty = #{dirty,jdbcType=LONGVARCHAR},
+      District1 = #{district1,jdbcType=LONGVARCHAR},
+      District2 = #{district2,jdbcType=LONGVARCHAR},
+      District3 = #{district3,jdbcType=LONGVARCHAR},
+      District4 = #{district4,jdbcType=LONGVARCHAR},
+      District5 = #{district5,jdbcType=LONGVARCHAR},
+      District6 = #{district6,jdbcType=LONGVARCHAR},
+      FirstNm = #{firstnm,jdbcType=LONGVARCHAR},
+      LastNm = #{lastnm,jdbcType=LONGVARCHAR},
+      Duty = #{duty,jdbcType=LONGVARCHAR},
+      Mobile = #{mobile,jdbcType=LONGVARCHAR},
+      Tel = #{tel,jdbcType=LONGVARCHAR},
+      Fax = #{fax,jdbcType=LONGVARCHAR},
+      EMail = #{email,jdbcType=LONGVARCHAR},
+      Nation = #{nation,jdbcType=LONGVARCHAR},
+      Taste = #{taste,jdbcType=LONGVARCHAR},
+      Education = #{education,jdbcType=LONGVARCHAR},
+      Company = #{company,jdbcType=LONGVARCHAR},
+      CTel = #{ctel,jdbcType=LONGVARCHAR},
+      CAddress = #{caddress,jdbcType=LONGVARCHAR},
+      CZip = #{czip,jdbcType=LONGVARCHAR},
+      Family = #{family,jdbcType=LONGVARCHAR},
+      Version = #{version,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select resultMap="ResultMapWithBLOBs" parameterType="com.git.dao.pojo.GuestSourceExample" id="selectByExampleWithBLOBsWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from guest_source
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select resultMap="BaseResultMap" parameterType="com.git.dao.pojo.GuestSourceExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from guest_source
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

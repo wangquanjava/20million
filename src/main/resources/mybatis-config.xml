@@ -7,5 +7,12 @@
         <!-- 开启驼峰自动映射 -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <setting name="cacheEnabled" value="false"/>
+        <setting name="defaultStatementTimeout" value="30"/>
     </settings>
+    <plugins>
+        <!--水平分表插件-->
+        <plugin interceptor="com.google.code.shardbatis.plugin.ShardPlugin">
+            <property name="shardingConfig" value="shard-config.xml"/>
+        </plugin>
+    </plugins>
 </configuration>

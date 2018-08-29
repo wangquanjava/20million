@@ -38,6 +38,12 @@ public class DemoController {
 
         return new BaseDataResponse(ResultCode.SUCCESSFUL_CODE, demos);
     }
+    @RequestMapping("init")
+    public BaseResponse init(Integer maxId) {
+        demoService.init(maxId);
+
+        return new BaseDataResponse(ResultCode.SUCCESSFUL_CODE);
+    }
 
 
 }

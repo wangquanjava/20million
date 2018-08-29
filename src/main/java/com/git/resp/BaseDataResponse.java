@@ -20,6 +20,10 @@ public class BaseDataResponse<T> extends BaseResponse{
 	private T data;
 	
     //1
+    public BaseDataResponse(String code){
+    	super(code);
+    }
+    //1
     public BaseDataResponse(String code,T data){
     	super(code);
     	this.data = data;

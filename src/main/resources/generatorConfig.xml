@@ -16,7 +16,7 @@
 
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/g05_ssm_template" userId="root" password="123456">
+                        connectionURL="jdbc:mysql://localhost:3306/kaifang2000" userId="root" password="">
         </jdbcConnection>
 
         <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL
@@ -46,6 +46,6 @@
         </javaClientGenerator>
 
         <!-- 指定数据库表 -->
-        <table tableName="demo"></table>
+        <table tableName="guest_source"></table>
     </context>
 </generatorConfiguration>

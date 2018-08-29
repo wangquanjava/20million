@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE shardingConfig PUBLIC "-//shardbatis.googlecode.com//DTD Shardbatis 2.0//EN"
+        "http://shardbatis.googlecode.com/dtd/shardbatis-config.dtd">
+<shardingConfig>
+    <parseList>
+        <value>com.git.dao.mapper.GuestMapper.insert</value>
+        <value>com.git.dao.mapper.GuestMapper.insertSelective</value>
+        <value>com.git.dao.mapper.GuestMapper.selectByExample</value>
+    </parseList>
+
+    <!-- 配置分表策略 -->
+    <strategy tableName="guest" strategyClass="com.git.strategy.GuestShardStrategy"/>
+</shardingConfig>
