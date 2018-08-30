@@ -1,6 +1,7 @@
 package com.git.controller;
 
 import com.git.dao.pojo.Demo;
+import com.git.dao.pojo.Guest;
 import com.git.resp.BaseDataResponse;
 import com.git.resp.BaseResponse;
 import com.git.resp.ResultCode;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @ResponseBody
@@ -43,6 +45,12 @@ public class DemoController {
         demoService.init(maxId);
 
         return new BaseDataResponse(ResultCode.SUCCESSFUL_CODE);
+    }
+    @RequestMapping("search")
+    public BaseResponse init(String cardNo, String address, String userName) {
+        Set<Guest> search = demoService.search(cardNo, address, userName);
+
+        return new BaseDataResponse(ResultCode.SUCCESSFUL_CODE, search);
     }
 
 

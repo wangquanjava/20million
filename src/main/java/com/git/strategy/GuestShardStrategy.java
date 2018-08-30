@@ -3,9 +3,14 @@ package com.git.strategy;
 import com.git.dao.pojo.Guest;
 import com.git.threadlocal.ShardTableIdThreadLocal;
 import com.google.code.shardbatis.strategy.ShardStrategy;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
+@Slf4j
 public class GuestShardStrategy implements ShardStrategy {
+
+    public static final int SHARD_SIZE = 63;
+
     /**
      * 方法说明:
      *
@@ -18,12 +23,7 @@ public class GuestShardStrategy implements ShardStrategy {
         if (ShardTableIdThreadLocal.integerThreadLocal.get() != null) {
             return getTable(tableName, ShardTableIdThreadLocal.integerThreadLocal.get());
         }
-
-
         String cardId = getCardId(param);
-//        if (StringUtils.isBlank(cardId)) {
-//            throw new RuntimeException("查询数据没有cardId");
-//        }
 
         int suffix = getSuffix(cardId);
         return getTable(tableName, suffix);
@@ -50,6 +50,6 @@ public class GuestShardStrategy implements ShardStrategy {
             return 0;
         }
         // 会得到0-99的数
-        return Math.abs(cardId.hashCode() & 99);
+        return Math.abs(cardId.hashCode() & SHARD_SIZE);
     }
 }
