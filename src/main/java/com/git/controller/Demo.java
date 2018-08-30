@@ -1,0 +1,10 @@
+package com.git.controller;
+
+public class Demo {
+    public static void main(String[] args) {
+        System.out.println("DROP TABLE IF EXISTS `guest`; CREATE TABLE `guest` ( \t`id` INT (11) UNSIGNED NOT NULL AUTO_INCREMENT, \t`name` VARCHAR (20) NOT NULL DEFAULT '' COMMENT '姓名', \t`card_no` VARCHAR (20) NOT NULL DEFAULT '' COMMENT '身份证', \t`sex` CHAR (6) NOT NULL DEFAULT '' COMMENT '性别', \t`birthday` date NOT NULL DEFAULT '1970-01-01' COMMENT '生日', \t`address` VARCHAR (100) NOT NULL DEFAULT '' COMMENT '酒店地址', \t`user_mobile` VARCHAR (20) NOT NULL DEFAULT '' COMMENT '用户手机号', \t`user_email` VARCHAR (50) NOT NULL DEFAULT '' COMMENT '用户邮箱', \t`hotel_tel` VARCHAR (50) NOT NULL DEFAULT '' COMMENT '酒店号码', \t`update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间', \tPRIMARY KEY (`id`), \tKEY `idex_card_no` (`card_no`) USING BTREE ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4;");
+        for (int i = 0; i < 64; i++) {
+            System.out.println(String.format("DROP TABLE IF EXISTS `%s`; CREATE TABLE `%s` ( \t`id` INT (11) UNSIGNED NOT NULL AUTO_INCREMENT, \t`name` VARCHAR (20) NOT NULL DEFAULT '' COMMENT '姓名', \t`card_no` VARCHAR (20) NOT NULL DEFAULT '' COMMENT '身份证', \t`sex` CHAR (6) NOT NULL DEFAULT '' COMMENT '性别', \t`birthday` date NOT NULL DEFAULT '1970-01-01' COMMENT '生日', \t`address` VARCHAR (100) NOT NULL DEFAULT '' COMMENT '酒店地址', \t`user_mobile` VARCHAR (20) NOT NULL DEFAULT '' COMMENT '用户手机号', \t`user_email` VARCHAR (50) NOT NULL DEFAULT '' COMMENT '用户邮箱', \t`hotel_tel` VARCHAR (50) NOT NULL DEFAULT '' COMMENT '酒店号码', \t`update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间', \tPRIMARY KEY (`id`), \tKEY `idex_card_no` (`card_no`) USING BTREE ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4;", "guest_" + i, "guest_" + i));
+        }
+    }
+}
